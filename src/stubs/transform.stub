@@ -1,0 +1,13 @@
+<?php
+
+namespace DummyNamespace;
+
+use Yish\Generators\Contracts\Transformable;
+
+class DummyClass implements Transformable
+{
+    public function transform($attributes)
+    {
+        //
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "name": "yish/generators",
+    "description": "This package extends the core file generators that are included with Laravel 5",
+    "authors": [
+        {
+            "name": "Yish",
+            "email": "mombuartworks@gmail.com"
+        }
+    ],
+    "require": {}
+}
