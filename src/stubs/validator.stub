@@ -1,0 +1,13 @@
+<?php
+
+namespace DummyNamespace;
+
+use Yish\Generators\Contracts\Validatable;
+
+class DummyClass implements Validatable
+{
+    public function validate($attribute, $value, $parameters, $validator)
+    {
+        //
+    }
+}

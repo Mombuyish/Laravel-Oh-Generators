@@ -7,6 +7,7 @@ use Yish\Generators\Commands\PresenterMakeCommand;
 use Yish\Generators\Commands\RepositoryMakeCommand;
 use Yish\Generators\Commands\ServiceMakeCommand;
 use Yish\Generators\Commands\TransformMakeCommand;
+use Yish\Generators\Commands\ValidatorMakeCommand;
 
 class GeneratorsServiceProvider extends ServiceProvider
 {
@@ -31,6 +32,7 @@ class GeneratorsServiceProvider extends ServiceProvider
         'RepositoryMake' => 'command.repository.make',
         'TransformMake' => 'command.transform.make',
         'PresenterMake' => 'command.presenter.make',
+        'ValidatorMake' => 'command.validator.make',
     ];
 
     /**
@@ -105,6 +107,18 @@ class GeneratorsServiceProvider extends ServiceProvider
     {
         $this->app->singleton('command.presenter.make', function ($app) {
             return new PresenterMakeCommand($app['files']);
+        });
+    }
+
+    /**
+     * Register the command.
+     *
+     * @return void
+     */
+    protected function registerValidatorMakeCommand()
+    {
+        $this->app->singleton('command.validator.make', function ($app) {
+            return new ValidatorMakeCommand($app['files']);
         });
     }
 }
