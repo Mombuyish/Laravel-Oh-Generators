@@ -7,5 +7,14 @@
             "email": "mombuartworks@gmail.com"
         }
     ],
+
+    "autoload": {
+        "psr-4": {
+            "Yish\\Generators": "src/"
+        },
+        "files": [
+            "src/Foundation/helpers.php"
+        ]
+    },
     "require": {}
 }
