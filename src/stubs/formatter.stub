@@ -1,0 +1,13 @@
+<?php
+
+namespace DummyNamespace;
+
+use Yish\Generators\Contracts\Formatable;
+
+class DummyClass implements Formatable
+{
+    public function format($items)
+    {
+        //
+    }
+}

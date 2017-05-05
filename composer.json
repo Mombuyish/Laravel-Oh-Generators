@@ -10,7 +10,7 @@
 
     "autoload": {
         "psr-4": {
-            "Yish\\Generators": "src/"
+            "Yish\\Generators\\": "src/"
         },
         "files": [
             "src/Foundation/helpers.php"

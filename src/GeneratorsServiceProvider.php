@@ -3,10 +3,11 @@
 namespace Yish\Generators;
 
 use Illuminate\Support\ServiceProvider;
+use Yish\Generators\Commands\FormatterMakeCommand;
 use Yish\Generators\Commands\PresenterMakeCommand;
 use Yish\Generators\Commands\RepositoryMakeCommand;
 use Yish\Generators\Commands\ServiceMakeCommand;
-use Yish\Generators\Commands\TransformMakeCommand;
+use Yish\Generators\Commands\TransformerMakeCommand;
 use Yish\Generators\Commands\ValidatorMakeCommand;
 
 class GeneratorsServiceProvider extends ServiceProvider
@@ -30,9 +31,10 @@ class GeneratorsServiceProvider extends ServiceProvider
     protected $devCommands = [
         'ServiceMake' => 'command.service.make',
         'RepositoryMake' => 'command.repository.make',
-        'TransformMake' => 'command.transform.make',
+        'TransformerMake' => 'command.transformer.make',
         'PresenterMake' => 'command.presenter.make',
         'ValidatorMake' => 'command.validator.make',
+        'FormatterMake' => 'command.formatter.make',
     ];
 
     /**
@@ -91,10 +93,10 @@ class GeneratorsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerTransformMakeCommand()
+    protected function registerTransformerMakeCommand()
     {
-        $this->app->singleton('command.transform.make', function ($app) {
-            return new TransformMakeCommand($app['files']);
+        $this->app->singleton('command.transformer.make', function ($app) {
+            return new TransformerMakeCommand($app['files']);
         });
     }
 
@@ -119,6 +121,18 @@ class GeneratorsServiceProvider extends ServiceProvider
     {
         $this->app->singleton('command.validator.make', function ($app) {
             return new ValidatorMakeCommand($app['files']);
+        });
+    }
+
+    /**
+     * Register the command.
+     *
+     * @return void
+     */
+    protected function registerFormatterMakeCommand()
+    {
+        $this->app->singleton('command.formatter.make', function ($app) {
+            return new FormatterMakeCommand($app['files']);
         });
     }
 }

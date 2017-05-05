@@ -4,23 +4,23 @@ namespace Yish\Generators\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 
-class TransformMakeCommand extends GeneratorCommand
+class FormatterMakeCommand extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'make:transform';
+    protected $name = 'make:formatter';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new transform class';
+    protected $description = 'Create a new formatter class';
 
-    protected $type = 'Transform';
+    protected $type = 'Formatter';
 
     /**
      * Get the stub file for the generator.
@@ -29,7 +29,7 @@ class TransformMakeCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__ . '/../stubs/transform.stub';
+        return __DIR__ . '/../stubs/formatter.stub';
     }
 
     /**
@@ -40,6 +40,6 @@ class TransformMakeCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\Transforms';
+        return $rootNamespace.'\Formatters';
     }
 }
