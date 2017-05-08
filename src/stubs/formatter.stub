@@ -3,11 +3,14 @@
 namespace DummyNamespace;
 
 use Yish\Generators\Contracts\Formatable;
+use Yish\Generators\Foundation\Format\Formatable as FormatSuccessAndFailed;
 
 class DummyClass implements Formatable
 {
-    public function format($items)
+    use FormatSuccessAndFailed;
+
+    public function success()
     {
-        //
+        return true;
     }
 }

@@ -3,7 +3,7 @@
 namespace Yish\Generators\Foundation\Format\Concerns;
 
 
-trait HasErrorMessage
+trait HasFailedMessage
 {
     protected $defaultErrorMessage = 'Oops, something have wrong.';
 
