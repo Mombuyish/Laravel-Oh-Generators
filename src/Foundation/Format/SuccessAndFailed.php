@@ -75,7 +75,9 @@ trait SuccessAndFailed
             return $message;
         }
 
-        return static::message();
+        $call = static::message();
+
+        return $call ?: $message;
     }
 
     /**
