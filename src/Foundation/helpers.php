@@ -1,12 +1,11 @@
 <?php
 
-use Yish\Generators\Contracts\Formatable;
-use Yish\Generators\Contracts\Transformable;
 use Yish\Generators\Exceptions\ClassNotFoundException;
 use Yish\Generators\Exceptions\MethodNotFoundException;
+use Illuminate\Http\Request;
 
 if (! function_exists('transform')) {
-    function transform(Transformable $instance, $attributes, $method = 'transform')
+    function transform(Request $request, $instance, $attributes, $method = 'transform')
     {
         if (! class_exists($instance)) {
             throw new ClassNotFoundException($instance);
@@ -16,12 +15,12 @@ if (! function_exists('transform')) {
             throw new MethodNotFoundException($method);
         }
 
-        return app($instance)->$method($attributes);
+        return app($instance)->$method($request, $attributes);
     }
 }
 
 if (! function_exists('format')) {
-    function format(Formatable $instance, $items, $method = 'format')
+    function format(Request $request, $instance, $items, $method = 'format')
     {
         if (! class_exists($instance)) {
             throw new ClassNotFoundException($instance);
@@ -31,6 +30,6 @@ if (! function_exists('format')) {
             throw new MethodNotFoundException($method);
         }
 
-        return app($instance)->$method($items);
+        return app($instance)->$method($request, $items);
     }
 }
