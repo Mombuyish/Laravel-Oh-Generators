@@ -4,7 +4,7 @@ namespace Yish\Generators\Contracts;
 
 use Illuminate\Http\Request;
 
-interface Formatable
+interface FormatContract
 {
     public function format(Request $request, $items);
 }

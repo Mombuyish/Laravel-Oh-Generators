@@ -12,13 +12,6 @@ use Yish\Generators\Commands\ValidatorMakeCommand;
 
 class GeneratorsServiceProvider extends ServiceProvider
 {
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
     protected $commands = [
         //
     ];

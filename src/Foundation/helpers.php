@@ -20,7 +20,7 @@ if (! function_exists('transform')) {
 }
 
 if (! function_exists('format')) {
-    function format(Request $request, $instance, $items, $method = 'format')
+    function format(Request $request, $instance, $items, $message = '', $status = 200, $method = 'format')
     {
         if (! class_exists($instance)) {
             throw new ClassNotFoundException($instance);
@@ -30,6 +30,6 @@ if (! function_exists('format')) {
             throw new MethodNotFoundException($method);
         }
 
-        return app($instance)->$method($request, $items);
+        return app($instance)->$method($request, $items, $message, $status);
     }
 }

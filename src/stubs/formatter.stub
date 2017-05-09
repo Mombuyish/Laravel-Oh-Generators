@@ -2,15 +2,32 @@
 
 namespace DummyNamespace;
 
-use Yish\Generators\Contracts\Formatable;
-use Yish\Generators\Foundation\Format\Formatable as FormatSuccessAndFailed;
+use Illuminate\Http\Request;
+use Yish\Generators\Contracts\FormatContract;
+use Yish\Generators\Foundation\Format\SuccessAndFailed;
 
-class DummyClass implements Formatable
+class DummyClass implements FormatContract
 {
-    use FormatSuccessAndFailed;
-
+    /**
+     * @return bool
+     * If you use FormatSuccessAndFailed, you can customize format describe success or failed.
+     */
     public function success()
     {
         return true;
+    }
+
+    /**
+     * @return string
+     * If you use FormatSuccessAndFailed, you can customize format message.
+     */
+    public function message()
+    {
+        //
+    }
+
+    public function format(Request $request, $items)
+    {
+        // TODO: Implement format() method.
     }
 }
