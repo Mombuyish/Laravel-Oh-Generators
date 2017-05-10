@@ -3,7 +3,7 @@
 namespace Yish\Generators\Contracts;
 
 
-interface Transformable
+interface TransformContract
 {
     public function transform($attributes);
 }
