@@ -5,7 +5,7 @@ use Yish\Generators\Exceptions\MethodNotFoundException;
 use Illuminate\Http\Request;
 
 if (! function_exists('transform')) {
-    function transform(Request $request, $instance, $attributes, $method = 'transform')
+    function transform($instance, $attributes, $method = 'transform')
     {
         if (! class_exists($instance)) {
             throw new ClassNotFoundException($instance);
@@ -15,7 +15,7 @@ if (! function_exists('transform')) {
             throw new MethodNotFoundException($method);
         }
 
-        return app($instance)->$method($request, $attributes);
+        return app($instance)->$method($attributes);
     }
 }
 

@@ -3,18 +3,19 @@
 namespace Yish\Generators\Foundation\Format;
 
 use Illuminate\Http\Request;
-use Yish\Generators\Exceptions\MethodNotFoundException;
+use Yish\Generators\Foundation\Format\Concerns\FormatFailed;
 use Yish\Generators\Foundation\Format\Concerns\HasMessage;
+use Yish\Generators\Foundation\Format\Concerns\FormatSuccess;
 
 trait SuccessAndFailed
 {
-    /*
-     * Message getter/setter.
-     */
-    use HasMessage;
+    use HasMessage,
+        FormatSuccess,
+        FormatFailed;
 
     /**
      * @var static
+     *
      * Return property.
      */
     protected $result;
@@ -22,70 +23,72 @@ trait SuccessAndFailed
     /**
      * @param Request $request
      * @param array $items
-     * @param int $status
      * @param string $message
-     * @return static
+     * @param int $code
+     * @return static Operation interface.
+     *
      * Operation interface.
      */
-    public function format(Request $request, $items = [], $message = '', $status = 200)
+    public function format(Request $request, $items = [], $message = '', $code = 200)
     {
-        return $this->formatting($request, $items, $message, $status)->getResult();
+        $this->replaceMessage();
+
+        return $this->formatting($request, $items, $code)->getResult();
     }
 
     /**
      * @param Request $request
      * @param array $items
-     * @param string $message
-     * @param int $status
+     * @param $code
      * @return $this Progressing formatting.
+     *
      * Progressing formatting.
-     * @internal param int $code
      */
-    public function formatting(Request $request, $items = [], $message = '', $status = 200)
+    public function formatting(Request $request, $items, $code)
     {
-        return static::formatted($request, $items, $message, $status);
+        return static::formatted($request, $items, $code);
     }
 
     /**
      * @param Request $request
      * @param array $items
-     * @param string $message
-     * @param int $status
+     * @param $code
      * @return $this Progressing final endpoint.
+     *
      * Progressing final endpoint.
-     * @internal param int $statusCode
      */
-    public function formatted(Request $request, $items = [], $message = '', $status = 200)
+    public function formatted(Request $request, $items, $code)
     {
         $base = $this->setBaseFormat($request);
 
-        $message = $this->isMessage($message);
+        $default = $this->setDefaultFormat($code, $this->getMessage());
 
-        $success = array_merge($base, $this->setSuccessFormat($items, $status, $message));
-        $failed = array_merge($base, $this->setFailedFormat($status, $message));
-
-        $this->result = $this->isSuccess() ? $success : $failed;
+        $this->result = $this->setStatusFormat(array_merge($base, $default), $items);
 
         return $this;
     }
 
-    public function isMessage($message)
+    /**
+     * @param $formatting
+     * @param $items
+     * @return array
+     *
+     * Call success or failed format.
+     */
+    public function setStatusFormat($formatting, $items)
     {
-        if (! method_exists(static::class, 'message')) {
-            return $message;
-        }
+        $endFormat = $this->isSuccess() ? $this->setSuccessFormat($items) : $this->setFailedFormat($items);
 
-        $call = static::message();
-
-        return $call ?: $message;
+        return array_merge($formatting, $endFormat);
     }
 
     /**
      * @param Request $request
      * @return array
-     * Set base format, request url and call HTTP verb.
+     *
+     * Set base format, link, method.
      */
-    private function setBaseFormat(Request $request)
+    public function setBaseFormat(Request $request)
     {
         return [
             'link' => $request->fullUrl(),
@@ -97,59 +100,15 @@ trait SuccessAndFailed
      * @param $code
      * @param $message
      * @return array
+     *
      * Set required format, status code and message
      */
-    private function setDefaultFormat($code, $message)
+    public function setDefaultFormat($code, $message)
     {
         return [
             'code' => $code,
-            'message' => $message ?: $this->getMessage(),
+            'message' => $this->getMessage(),
         ];
-    }
-
-    /**
-     * @param $items
-     * @param $code
-     * @param $message
-     * @return array
-     * Merge success required format to base format.
-     */
-    private function setSuccessFormat($items, $code, $message)
-    {
-        $message ?: $this->getMessage();
-
-        return array_merge($this->setDefaultFormat($code, $message), [
-            'items' => $items,
-        ]);
-    }
-
-    /**
-     * @param $code
-     * @param $message
-     * @return array
-     * Merge failed required format to base format.
-     */
-    private function setFailedFormat($code, $message)
-    {
-        $message ?: $this->setErrorMessage();
-
-        return [
-            'error' => $this->setDefaultFormat($code, $message),
-        ];
-    }
-
-    /**
-     * @return bool
-     * @throws MethodNotFoundException
-     * Be sure the success method is exist.
-     */
-    protected function isSuccess()
-    {
-        if (! method_exists(static::class, 'success')) {
-            throw new MethodNotFoundException('success');
-        }
-
-        return (bool) static::success();
     }
 
     /**
@@ -159,5 +118,16 @@ trait SuccessAndFailed
     public function getResult()
     {
         return $this->result;
+    }
+
+
+    /**
+     * @return bool
+     *
+     * The formatter called success or failed.
+     */
+    public function isSuccess()
+    {
+        return $this->status;
     }
 }

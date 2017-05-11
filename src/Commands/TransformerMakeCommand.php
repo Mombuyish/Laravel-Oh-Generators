@@ -40,6 +40,6 @@ class TransformerMakeCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\Transforms';
+        return $rootNamespace.'\Transformers';
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Yish\Generators\Contracts;
+namespace Yish\Generators\Foundation\Transform;
 
 
 interface TransformContract

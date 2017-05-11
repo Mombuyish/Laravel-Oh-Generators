@@ -2,9 +2,9 @@
 
 namespace DummyNamespace;
 
-use Yish\Generators\Contracts\Transformable;
+use Yish\Generators\Foundation\Transform\TransformContract;
 
-class DummyClass implements Transformable
+class DummyClass implements TransformContract
 {
     public function transform($attributes)
     {
