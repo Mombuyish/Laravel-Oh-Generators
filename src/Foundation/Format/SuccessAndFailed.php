@@ -14,20 +14,20 @@ trait SuccessAndFailed
         FormatFailed;
 
     /**
-     * @var static
-     *
      * Return property.
+     *
+     * @var static
      */
     protected $result;
 
     /**
+     * Operation interface.
+     *
      * @param Request $request
      * @param array $items
      * @param string $message
      * @param int $code
-     * @return static Operation interface.
-     *
-     * Operation interface.
+     * @return static
      */
     public function format(Request $request, $items = [], $message = '', $code = 200)
     {
@@ -37,12 +37,12 @@ trait SuccessAndFailed
     }
 
     /**
+     * Progressing formatting.
+     *
      * @param Request $request
      * @param array $items
      * @param $code
-     * @return $this Progressing formatting.
-     *
-     * Progressing formatting.
+     * @return $this
      */
     public function formatting(Request $request, $items, $code)
     {
@@ -50,18 +50,18 @@ trait SuccessAndFailed
     }
 
     /**
+     * Progressing final endpoint.
+     *
      * @param Request $request
      * @param array $items
      * @param $code
-     * @return $this Progressing final endpoint.
-     *
-     * Progressing final endpoint.
+     * @return $this
      */
     public function formatted(Request $request, $items, $code)
     {
         $base = $this->setBaseFormat($request);
 
-        $default = $this->setDefaultFormat($code, $this->getMessage());
+        $default = $this->setDefaultFormat($code);
 
         $this->result = $this->setStatusFormat(array_merge($base, $default), $items);
 
@@ -69,11 +69,11 @@ trait SuccessAndFailed
     }
 
     /**
+     * Call success or failed format.
+     *
      * @param $formatting
      * @param $items
      * @return array
-     *
-     * Call success or failed format.
      */
     public function setStatusFormat($formatting, $items)
     {
@@ -83,10 +83,10 @@ trait SuccessAndFailed
     }
 
     /**
+     * Set base format, link, method.
+     *
      * @param Request $request
      * @return array
-     *
-     * Set base format, link, method.
      */
     public function setBaseFormat(Request $request)
     {
@@ -97,13 +97,12 @@ trait SuccessAndFailed
     }
 
     /**
-     * @param $code
-     * @param $message
-     * @return array
+     * Set required format, status code and message.
      *
-     * Set required format, status code and message
+     * @param $code
+     * @return array
      */
-    public function setDefaultFormat($code, $message)
+    public function setDefaultFormat($code)
     {
         return [
             'code' => $code,
@@ -112,8 +111,9 @@ trait SuccessAndFailed
     }
 
     /**
-     * @return static
      * Final result endpoint.
+     *
+     * @return static
      */
     public function getResult()
     {
@@ -122,9 +122,9 @@ trait SuccessAndFailed
 
 
     /**
-     * @return bool
-     *
      * The formatter called success or failed.
+     *
+     * @return bool
      */
     public function isSuccess()
     {

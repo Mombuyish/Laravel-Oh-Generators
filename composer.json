@@ -16,5 +16,11 @@
             "src/Foundation/helpers.php"
         ]
     },
+
+    "autoload-dev": {
+        "psr-4": {
+            "Yish\\Generators\\Tests\\": "tests/"
+        }
+    },
     "require": {}
 }

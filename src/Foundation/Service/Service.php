@@ -48,12 +48,12 @@ abstract class Service
 
     /**
      * @param $column
-     * @param $id
+     * @param $value
      * @return mixed
      */
-    public function findBy($column, $id)
+    public function findBy($column, $value)
     {
-        return $this->repository->findBy($column, $id);
+        return $this->repository->findBy($column, $value);
     }
 
     /**
@@ -66,12 +66,12 @@ abstract class Service
 
     /**
      * @param $column
-     * @param $attribute
+     * @param $value
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function getBy($column, $attribute)
+    public function getBy($column, $value)
     {
-        return $this->repository->getBy($column, $attribute);
+        return $this->repository->getBy($column, $value);
     }
 
     /**
@@ -86,13 +86,13 @@ abstract class Service
 
     /**
      * @param $column
-     * @param $attribute
+     * @param $value
      * @param $attributes
      * @return bool
      */
-    public function updateBy($column, $attribute, $attributes)
+    public function updateBy($column, $value, $attributes)
     {
-        return $this->repository->updateBy($column, $attribute, $attributes);
+        return $this->repository->updateBy($column, $value, $attributes);
     }
 
     /**
