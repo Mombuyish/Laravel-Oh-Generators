@@ -10,7 +10,7 @@ trait FormatSuccess
      *
      * Merge success required format to base format.
      */
-    protected function setSuccessFormat($items)
+    protected function setSuccessFormat($items = [])
     {
         return [
             'items' => $items,

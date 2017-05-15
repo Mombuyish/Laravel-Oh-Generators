@@ -25,16 +25,23 @@ trait HasMessage
             return (new static)->message();
         });
 
-        // if you have give a string in message method, it will replace default message.
+        // if you have give a string in message method,
+        // it will replace default message.
         if (! empty($static)) {
             $this->setMessage($static);
+
+            return $this->getMessage();
         }
 
         //if not, set default message.
         if ($this->isSuccess()) {
             $this->setMessage($this->message);
+
+            return $this->getMessage();
         } else {
             $this->setMessage($this->errorMessage);
+
+            return $this->getMessage();
         }
     }
 }

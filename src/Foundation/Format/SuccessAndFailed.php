@@ -4,12 +4,14 @@ namespace Yish\Generators\Foundation\Format;
 
 use Illuminate\Http\Request;
 use Yish\Generators\Foundation\Format\Concerns\FormatFailed;
+use Yish\Generators\Foundation\Format\Concerns\HasCode;
 use Yish\Generators\Foundation\Format\Concerns\HasMessage;
 use Yish\Generators\Foundation\Format\Concerns\FormatSuccess;
 
 trait SuccessAndFailed
 {
     use HasMessage,
+        HasCode,
         FormatSuccess,
         FormatFailed;
 
@@ -33,6 +35,8 @@ trait SuccessAndFailed
     {
         $this->replaceMessage();
 
+        $code = $this->replaceCode();
+
         return $this->formatting($request, $items, $code)->getResult();
     }
 
@@ -44,7 +48,7 @@ trait SuccessAndFailed
      * @param $code
      * @return $this
      */
-    public function formatting(Request $request, $items, $code)
+    public function formatting(Request $request, $items = [], $code)
     {
         return static::formatted($request, $items, $code);
     }
@@ -57,7 +61,7 @@ trait SuccessAndFailed
      * @param $code
      * @return $this
      */
-    public function formatted(Request $request, $items, $code)
+    public function formatted(Request $request, $items = [], $code)
     {
         $base = $this->setBaseFormat($request);
 
@@ -75,7 +79,7 @@ trait SuccessAndFailed
      * @param $items
      * @return array
      */
-    public function setStatusFormat($formatting, $items)
+    public function setStatusFormat($formatting, $items = [])
     {
         $endFormat = $this->isSuccess() ? $this->setSuccessFormat($items) : $this->setFailedFormat($items);
 

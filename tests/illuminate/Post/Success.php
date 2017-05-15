@@ -9,7 +9,7 @@ use Yish\Generators\Foundation\Format\Formatter;
 
 class Success extends Formatter implements FormatContract
 {
-    public function format(Request $request, $items, $message = '', $status = 200)
+    public function format(Request $request, $items = [], $message = '', $status = 200)
     {
         return [
             'link' => url('/test/package'),
