@@ -4,44 +4,52 @@ namespace Yish\Generators\Foundation\Format\Concerns;
 
 trait HasMessage
 {
-    protected $message = 'Get something successful.';
-
-    protected $errorMessage = 'Oops, something have wrong.';
-
+    /**
+     * Get message.
+     *
+     * @return string
+     */
     public function getMessage()
     {
         return $this->message;
     }
 
+    /**
+     * Set message.
+     *
+     * @param $message
+     */
     public function setMessage($message)
     {
         $this->message = $message;
     }
 
+    /**
+     * Replace message code if instance code method from static.
+     *
+     * @return $this
+     */
     public function replaceMessage()
     {
-        //call in message method.
-        $static = call_user_func(function () {
-            return (new static)->message();
-        });
+        if (method_exists(new static, 'message')) {
+            $message = call_user_func(function () {
+                return (new static)->message();
+            });
 
-        // if you have give a string in message method,
-        // it will replace default message.
-        if (! empty($static)) {
-            $this->setMessage($static);
+            $this->setMessage($message);
 
-            return $this->getMessage();
+            return $this;
         }
 
         //if not, set default message.
         if ($this->isSuccess()) {
             $this->setMessage($this->message);
 
-            return $this->getMessage();
-        } else {
-            $this->setMessage($this->errorMessage);
-
-            return $this->getMessage();
+            return $this;
         }
+
+        $this->setMessage($this->errorMessage);
+
+        return $this;
     }
 }
