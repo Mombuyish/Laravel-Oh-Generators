@@ -275,4 +275,147 @@ class FormatterTest extends TestCase
 
         $this->assertEquals($expected, $result);
     }
+
+    /**
+     * @test
+     * @group package-formatter
+     */
+    public function it_should_format_and_customize_message_success_by_helper()
+    {
+        $message = 'hello, world';
+
+        $expected = [
+                'link' => url('/test/package'),
+                'method' => 'GET',
+                'code' => Response::HTTP_OK,
+                'message' => $message,
+                'items' => [],
+            ];
+
+        $result = format(request(), Success::class, [], $message, Response::HTTP_OK);
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     * @group package-formatter
+     */
+    public function it_should_format_and_customize_code_success_by_helper()
+    {
+        $expected = [
+            'link' => url('/test/package'),
+            'method' => 'GET',
+            'code' => Response::HTTP_CREATED,
+            'message' => '',
+            'items' => [],
+        ];
+
+        $result = format(request(), Success::class, [], '', Response::HTTP_CREATED);
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     * @group package-formatter
+     */
+    public function it_should_format_and_customize_all_success_by_helper()
+    {
+        $message = 'Hello';
+
+        $expected = [
+            'link' => url('/test/package'),
+            'method' => 'GET',
+            'code' => Response::HTTP_CREATED,
+            'message' => $message,
+            'items' => [],
+        ];
+
+        $result = format(request(), Success::class, [], $message, Response::HTTP_CREATED);
+
+        $this->assertEquals($expected, $result);
+    }
+
+
+    /**
+     * @test
+     * @group package-formatter
+     */
+    public function it_should_format_and_customize_message_failed_by_helper()
+    {
+        $message = 'hello, world';
+
+        $expected = [
+            'link' => url('/test/package'),
+            'method' => 'GET',
+            'code' => Response::HTTP_UNPROCESSABLE_ENTITY,
+            'message' => $message,
+            'errors' => [],
+        ];
+
+        $result = format(request(), Failed::class, [], $message, Response::HTTP_UNPROCESSABLE_ENTITY);
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     * @group package-formatter
+     */
+    public function it_should_format_and_customize_code_failed_by_helper()
+    {
+        $expected = [
+            'link' => url('/test/package'),
+            'method' => 'GET',
+            'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
+            'message' => '',
+            'errors' => [],
+        ];
+
+        $result = format(request(), Failed::class, [], '', Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     * @group package-formatter
+     */
+    public function it_should_format_and_customize_all_failed_by_helper()
+    {
+        $message = 'Hello';
+
+        $expected = [
+            'link' => url('/test/package'),
+            'method' => 'GET',
+            'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
+            'message' => $message,
+            'errors' => [],
+        ];
+
+        $result = format(request(), Failed::class, [], $message, Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     * @group package-formatter
+     */
+    public function it_should_format_and_customize_code_empty_exception_by_helper()
+    {
+        $expected = [
+            'link' => url('/test/package'),
+            'method' => 'GET',
+            'code' => '',
+            'message' => '',
+            'errors' => [],
+        ];
+
+        $result = format(request(), Failed::class, [], '', '');
+
+
+        $this->assertEquals($expected, $result);
+    }
 }

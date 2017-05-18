@@ -45,19 +45,19 @@ trait SuccessAndFailed
      * @param int $code
      * @return static
      */
-    public function format(Request $request, $items = [], /* Handling. */ $message = '', /* handling */ $code = 200)
+    public function format(Request $request, $items = [], $message = '', $code = 200)
     {
         // set $this->message
         // if it have customize method message, replace it.
         // or not if status true(success) given a default success message,
         // or failed message.
-        $this->replaceMessage();
+        $this->replaceMessage($message);
 
         // set $this->code
         // if it have customize method code, replace it.
         // or not if status true(success) given a default success code,
         // or failed code.
-        $this->replaceCode();
+        $this->replaceCode($code);
 
         return $this->formatting($request, $items, $this->code)->getResult();
     }
