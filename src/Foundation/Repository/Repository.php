@@ -78,7 +78,7 @@ abstract class Repository
      * @param array $columns
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
      */
-    public function find($id, $columns = array())
+    public function find($id, $columns = ['*'])
     {
         return $this->model->find($id, $columns);
     }
@@ -89,7 +89,7 @@ abstract class Repository
      * @param array $columns
      * @return mixed
      */
-    public function findBy($column, $value, $columns = array())
+    public function findBy($column, $value, $columns = ['*'])
     {
         return $this->model->where($column, $value)->first($columns);
     }
