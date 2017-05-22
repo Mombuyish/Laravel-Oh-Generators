@@ -48,7 +48,7 @@ abstract class Repository
      * @param array $options
      * @return bool
      */
-    public function updateBy($column, $value, array $attributes, array $options = [])
+    public function updateBy($column, $value, array $attributes = [], array $options = [])
     {
         return $this->model->where($column, $value)->update($attributes, $options);
     }
@@ -57,7 +57,7 @@ abstract class Repository
      * @param array $columns
      * @return mixed
      */
-    public function first($columns = array())
+    public function first($columns = ['*'])
     {
         return $this->model->first($columns);
     }
@@ -68,7 +68,7 @@ abstract class Repository
      * @param array $columns
      * @return mixed
      */
-    public function firstBy($column, $value, $columns = array())
+    public function firstBy($column, $value, $columns = ['*'])
     {
         return $this->model->where($column, $value)->first($columns);
     }
@@ -98,7 +98,7 @@ abstract class Repository
      * @param array $columns
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function get($columns = array())
+    public function get($columns = ['*'])
     {
         return $this->model->get($columns);
     }
@@ -109,7 +109,7 @@ abstract class Repository
      * @param array $columns
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function getBy($column, $value, $columns = array())
+    public function getBy($column, $value, $columns = ['*'])
     {
         return $this->model->where($column, $value)->get($columns);
     }
