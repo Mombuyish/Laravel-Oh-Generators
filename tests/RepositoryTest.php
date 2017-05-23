@@ -2,37 +2,23 @@
 
 namespace Yish\Generators\Tests;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Tests\TestCase;
-use Mockery as m;
 use Yish\Generators\Tests\Illuminate\Repositories\UserRepository;
 use Yish\Generators\Tests\Illuminate\User as FakeUser;
-use Illuminate\Contracts\Console\Kernel;
 
 class RepositoryTest extends TestCase
 {
-    use DatabaseMigrations;
-
-    public function tearDown()
-    {
-        m::close();
-    }
-
     /**
      * @test
      * @group package-repository
      */
     public function it_should_take_all()
     {
-        $user = factory(FakeUser::class)->create([
-            'name' => 'yish',
-            'email' => 'yish@tt.com',
-        ]);
+        factory(FakeUser::class)->times(5)->create();
 
-        $result = app(UserRepository::class)->find(1);
+        $result = app(UserRepository::class)->all();
 
-        $this->assertEquals($user->name, $result->name);
+        $this->assertCount(5, $result);
     }
 
     /**

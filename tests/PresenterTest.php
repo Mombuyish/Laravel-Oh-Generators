@@ -2,14 +2,13 @@
 
 namespace Yish\Generators\Tests;
 
-use Tests\TestCase;
 use Yish\Generators\Tests\Illuminate\Presenters\UserPresenter;
 
 class PresenterTest extends TestCase
 {
     /**
      * @test
-     * @group presenter
+     * @group package-presenter
      */
     public function it_should_return_specific_data()
     {

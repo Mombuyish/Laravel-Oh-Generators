@@ -11,6 +11,14 @@ abstract class Service
     protected $repository;
 
     /**
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function all()
+    {
+        return $this->repository->all();
+    }
+
+    /**
      * @param $attributes
      * @return \Illuminate\Database\Eloquent\Model
      */
@@ -133,13 +141,5 @@ abstract class Service
     public function paginate($page = 12)
     {
         return $this->repository->paginate($page);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public function all()
-    {
-        return $this->repository->all();
     }
 }

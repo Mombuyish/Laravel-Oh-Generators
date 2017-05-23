@@ -4,10 +4,9 @@ namespace Yish\Generators\Tests;
 
 use Illuminate\Http\Response;
 use Mockery as m;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Yish\Generators\Tests\Illuminate\Post\CustomFormatter;
+use Yish\Generators\Tests\Illuminate\Post\CustomStatusFailedFormatter;
+use Yish\Generators\Tests\Illuminate\Post\CustomStatusFormatter;
 use Yish\Generators\Tests\Illuminate\Post\Failed;
 use Yish\Generators\Tests\Illuminate\Post\Success;
 use Yish\Generators\Tests\Illuminate\Post\CustomMessage\Success as SuccessMessage;
@@ -417,5 +416,96 @@ class FormatterTest extends TestCase
 
 
         $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     * @group package-formatter
+     */
+    public function it_should_format_not_found_class_by_helper()
+    {
+        $this->expectException(\Yish\Generators\Exceptions\ClassNotFoundException::class);
+
+        format(request(), ABCD::class, [], '', '');
+    }
+
+    /**
+     * @test
+     * @group package-formatter
+     */
+    public function it_should_format_not_found_method_by_helper()
+    {
+        $this->expectException(\Yish\Generators\Exceptions\MethodNotFoundException::class);
+
+        format(request(), Failed::class, [], '', '', 'abcd');
+    }
+
+    /**
+     * @test
+     * @group package-formatter
+     */
+    public function it_should_set_message_if_not_empty()
+    {
+        $message = 'Hello';
+
+        $formatter = $this->app->make(CustomFormatter::class);
+
+        $formatter->format(request(), [], $message);
+
+        $this->assertEquals($message, $formatter->getMessage());
+    }
+
+    /**
+     * @test
+     * @group package-formatter
+     */
+    public function it_should_set_code_if_status_true()
+    {
+        $formatter = $this->app->make(CustomStatusFormatter::class);
+
+        $formatter->format(request(), [], '', '');
+
+        $this->assertEquals(Response::HTTP_OK, $formatter->getCode());
+    }
+
+    /**
+     * @test
+     * @group package-formatter
+     */
+    public function it_should_set_code_if_status_false()
+    {
+        $formatter = $this->app->make(CustomStatusFailedFormatter::class);
+
+        $formatter->format(request(), [], '', '');
+
+        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $formatter->getCode());
+    }
+
+    /**
+     * @test
+     * @group package-formatter
+     */
+    public function it_should_set_code_if_code_not_empty()
+    {
+        $formatter = $this->app->make(CustomStatusFormatter::class);
+
+        $formatter->format(request(), [], '', Response::HTTP_NOT_MODIFIED);
+
+        $this->assertEquals(Response::HTTP_NOT_MODIFIED, $formatter->getCode());
+    }
+
+    /**
+     * @test
+     * @group package-formatter
+     */
+    public function it_should_get_code()
+    {
+        $message = 'Hello';
+
+        $formatter = $this->app->make(CustomFormatter::class);
+
+        $formatter->format(request(), [], $message, Response::HTTP_UNPROCESSABLE_ENTITY);
+
+        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $formatter->getCode());
     }
 }
