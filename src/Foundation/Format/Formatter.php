@@ -6,7 +6,7 @@ abstract class Formatter
 {
     /**
      * @var bool
-     * If you use FormatSuccessAndFailed, you can determine format success or failed.
+     * If you use Statusable, you can determine format success or failed.
      */
     protected $status = true;
 }

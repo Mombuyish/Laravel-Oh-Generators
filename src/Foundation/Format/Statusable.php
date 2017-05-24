@@ -8,7 +8,7 @@ use Yish\Generators\Foundation\Format\Concerns\HasCode;
 use Yish\Generators\Foundation\Format\Concerns\HasMessage;
 use Yish\Generators\Foundation\Format\Concerns\FormatSuccess;
 
-trait SuccessAndFailed
+trait Statusable
 {
     use HasMessage,
         HasCode,
