@@ -101,7 +101,7 @@ Providing commands:
 > It can be generating class presenter.
 
 ```
-    $ php artisan make:transformer UserPresenter
+    $ php artisan make:presenter UserPresenter
 ```
 
-If you need more examples and documentaion, see [documentation](https://github.com/Mombuyish/Laravel-Oh-Generators/wiki).
+If you need more examples and documentation, see [documentation](https://github.com/Mombuyish/Laravel-Oh-Generators/wiki).
