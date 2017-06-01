@@ -27,10 +27,9 @@ trait HasMessage
     /**
      * Replace message code if instance code method from static.
      *
-     * @param $message
      * @return $this
      */
-    public function replaceMessage($message)
+    public function replaceMessage()
     {
         if (method_exists(new static, 'message')) {
             $message = call_user_func(function () {
@@ -42,14 +41,8 @@ trait HasMessage
             return $this;
         }
 
-        if (! empty($message)) {
-            $this->setMessage($message);
-
-            return $this;
-        }
-
         //if not, set default message.
-        if ($this->isSuccess()) {
+        if ($this->decideStatus()) {
             $this->setMessage($this->message);
 
             return $this;

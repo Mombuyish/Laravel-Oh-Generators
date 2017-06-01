@@ -5,9 +5,8 @@ namespace DummyNamespace;
 use Illuminate\Http\Request;
 use Yish\Generators\Foundation\Format\FormatContract;
 use Yish\Generators\Foundation\Format\Statusable;
-use Yish\Generators\Foundation\Format\Formatter;
 
-class DummyClass extends Formatter implements FormatContract
+class DummyClass implements FormatContract
 {
     public function format(Request $request, $items = [], $message = '', $status = 200)
     {

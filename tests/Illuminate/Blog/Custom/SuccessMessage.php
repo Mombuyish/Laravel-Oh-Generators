@@ -1,15 +1,15 @@
 <?php
 
-namespace Yish\Generators\Tests\Illuminate\Post\CustomMessage;
+namespace Yish\Generators\Tests\Illuminate\Blog\Custom;
 
-use Illuminate\Http\Request;
 use Yish\Generators\Foundation\Format\FormatContract;
 use Yish\Generators\Foundation\Format\Statusable;
-use Yish\Generators\Foundation\Format\Formatter;
 
-class Success extends Formatter implements FormatContract
+class SuccessMessage implements FormatContract
 {
     use Statusable;
+
+    protected $status = true;
 
     public function message()
     {

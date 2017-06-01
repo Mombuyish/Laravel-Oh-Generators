@@ -1,14 +1,12 @@
 <?php
 
-namespace Yish\Generators\Tests\Illuminate\Post\CustomCode;
+namespace Yish\Generators\Tests\Illuminate\Blog\Custom;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Yish\Generators\Foundation\Format\FormatContract;
 use Yish\Generators\Foundation\Format\Statusable;
-use Yish\Generators\Foundation\Format\Formatter;
 
-class Failed extends Formatter implements FormatContract
+class FailedAll implements FormatContract
 {
     use Statusable;
 
@@ -17,5 +15,10 @@ class Failed extends Formatter implements FormatContract
     public function code()
     {
         return Response::HTTP_INTERNAL_SERVER_ERROR;
+    }
+
+    public function message()
+    {
+        return 'Failed.';
     }
 }

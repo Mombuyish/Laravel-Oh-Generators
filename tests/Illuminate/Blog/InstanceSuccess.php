@@ -1,21 +1,19 @@
 <?php
 
-namespace Yish\Generators\Tests\Illuminate\Post;
+namespace Yish\Generators\Tests\Illuminate\Blog;
 
 use Illuminate\Http\Request;
 use Yish\Generators\Foundation\Format\FormatContract;
-use Yish\Generators\Foundation\Format\Statusable;
-use Yish\Generators\Foundation\Format\Formatter;
 
-class Success extends Formatter implements FormatContract
+class InstanceSuccess implements FormatContract
 {
     public function format(Request $request, $items = [], $message = '', $status = 200)
     {
         return [
-            'link' => url('/test/package'),
+            'link' => url('/'),
             'method' => 'GET',
             'code' => $status,
-            'message' => $message,
+            'message' => 'Hello boys.',
             'items' => $items
         ];
     }

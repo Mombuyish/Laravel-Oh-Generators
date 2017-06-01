@@ -48,15 +48,4 @@ class TransformerTest extends TestCase
 
         transform(ABCD::class, []);
     }
-
-    /**
-     * @test
-     * @group package-transformer
-     */
-    public function it_should_not_found_method_by_helper()
-    {
-        $this->expectException(\Yish\Generators\Exceptions\MethodNotFoundException::class);
-
-        transform(UserTransformer::class, [], 'abcd');
-    }
 }

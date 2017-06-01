@@ -36,14 +36,13 @@ trait HasCode
     /**
      * Replace status code if instance code method from static.
      *
-     * @param $code
      * @return $this
      */
-    public function replaceCode($code)
+    public function replaceCode()
     {
-        if (method_exists(new static, 'code')) {
+        if (method_exists($this, 'code')) {
             $code = call_user_func(function () {
-                return (new static)->code();
+                return $this->code();
             });
 
             $this->setCode($code);
@@ -51,13 +50,7 @@ trait HasCode
             return $this;
         }
 
-        if (! empty($code)) {
-            $this->setCode($code);
-
-            return $this;
-        }
-
-        if ($this->isSuccess()) {
+        if ($this->decideStatus()) {
             $this->setCode(Response::HTTP_OK);
 
             return $this;

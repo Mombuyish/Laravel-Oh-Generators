@@ -3,6 +3,7 @@
 namespace Yish\Generators\Foundation\Format;
 
 use Illuminate\Http\Request;
+use Yish\Generators\Exceptions\InvalidArgumentException;
 use Yish\Generators\Foundation\Format\Concerns\FormatFailed;
 use Yish\Generators\Foundation\Format\Concerns\HasCode;
 use Yish\Generators\Foundation\Format\Concerns\HasMessage;
@@ -45,19 +46,19 @@ trait Statusable
      * @param int $code
      * @return static
      */
-    public function format(Request $request, $items = [], $message = '', $code = 200)
+    public function format(Request $request, $items = [])
     {
         // set $this->message
         // if it have customize method message, replace it.
         // or not if status true(success) given a default success message,
         // or failed message.
-        $this->replaceMessage($message);
+        $this->replaceMessage();
 
         // set $this->code
         // if it have customize method code, replace it.
         // or not if status true(success) given a default success code,
         // or failed code.
-        $this->replaceCode($code);
+        $this->replaceCode();
 
         return $this->formatting($request, $items, $this->code)->getResult();
     }
@@ -103,7 +104,7 @@ trait Statusable
      */
     public function setStatusFormat($formatting, $items = [])
     {
-        $endFormat = $this->isSuccess() ? $this->setSuccessFormat($items) : $this->setFailedFormat($items);
+        $endFormat = $this->decideStatus() ? $this->setSuccessFormat($items) : $this->setFailedFormat($items);
 
         return array_merge($formatting, $endFormat);
     }
@@ -150,9 +151,26 @@ trait Statusable
     /**
      * The formatter called success or failed.
      *
+     */
+    public function decideStatus()
+    {
+        if (property_exists($this, 'status')) {
+            if (! is_bool($this->getStatus())) {
+                throw new InvalidArgumentException('status');
+            }
+
+            return $this->getStatus();
+        }
+
+        return false;
+    }
+
+    /**
+     * Get status.
+     *
      * @return bool
      */
-    public function isSuccess()
+    public function getStatus()
     {
         return $this->status;
     }
