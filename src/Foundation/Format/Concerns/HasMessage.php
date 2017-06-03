@@ -31,9 +31,9 @@ trait HasMessage
      */
     public function replaceMessage()
     {
-        if (method_exists(new static, 'message')) {
+        if (method_exists($this, 'message')) {
             $message = call_user_func(function () {
-                return (new static)->message();
+                return $this->message();
             });
 
             $this->setMessage($message);

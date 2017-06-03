@@ -42,8 +42,6 @@ trait Statusable
      *
      * @param Request $request
      * @param array $items
-     * @param string $message
-     * @param int $code
      * @return static
      */
     public function format(Request $request, $items = [])
