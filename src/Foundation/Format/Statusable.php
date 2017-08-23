@@ -28,7 +28,7 @@ trait Statusable
      *
      * @var string
      */
-    protected $errorMessage = 'Oops, something have wrong.';
+    protected $errorMessage = 'Oops, something went wrong.';
 
     /**
      * Return property.

@@ -123,7 +123,7 @@ class FormatterTest extends TestCase
      */
     public function it_should_format_failed_by_trait()
     {
-        $errorMessage = 'Oops, something have wrong.';
+        $errorMessage = 'Oops, something went wrong.';
 
         $expected = [
             'link' => url('/'),
@@ -242,7 +242,7 @@ class FormatterTest extends TestCase
             'link' => url('/'),
             'method' => 'GET',
             'code' => $code,
-            'message' => 'Oops, something have wrong.',
+            'message' => 'Oops, something went wrong.',
             'errors' => null,
         ];
 
@@ -420,7 +420,7 @@ class FormatterTest extends TestCase
             'link' => url('/'),
             'method' => 'GET',
             'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
-            'message' => 'Oops, something have wrong.',
+            'message' => 'Oops, something went wrong.',
             'errors' => [],
         ];
 
@@ -480,7 +480,7 @@ class FormatterTest extends TestCase
      */
     public function if_status_no_given_will_be_false()
     {
-        $message = 'Oops, something have wrong.';
+        $message = 'Oops, something went wrong.';
 
         $expected = [
             'link' => url('/'),
