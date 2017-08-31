@@ -19,7 +19,12 @@ Install by composer
     $ composer require yish/generators
 ```
 
+* 5.4 before using branch `1.1.x`
+* 5.5 or later using branch `2.0.x`
+
 Registing Service Provider
+
+If you are using laravel 5.5, you can use auto discover also, you don't need put in service provider to `app.php`.
 
 ``` php
 <?php
@@ -27,24 +32,7 @@ Registing Service Provider
 //app.php
 
 'providers' => [
-        /*
-         * Package Service Providers...
-         */
-        Laravel\Tinker\TinkerServiceProvider::class,
-        
-        /*
-         * Generator Service Provider
-         */
         \Yish\Generators\GeneratorsServiceProvider::class,
-        
-        /*
-         * Application Service Providers...
-         */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
     ],
 
 ```
