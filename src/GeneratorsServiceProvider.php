@@ -8,6 +8,7 @@ use Yish\Generators\Commands\PresenterMakeCommand;
 use Yish\Generators\Commands\RepositoryMakeCommand;
 use Yish\Generators\Commands\ServiceMakeCommand;
 use Yish\Generators\Commands\TransformerMakeCommand;
+use Yish\Generators\Commands\FoundationMakeCommand;
 
 class GeneratorsServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,7 @@ class GeneratorsServiceProvider extends ServiceProvider
         'TransformerMake' => 'command.transformer.make',
         'PresenterMake' => 'command.presenter.make',
         'FormatterMake' => 'command.formatter.make',
+        'FoundationMake' => 'command.foundation.make',
     ];
 
     /**
@@ -112,6 +114,18 @@ class GeneratorsServiceProvider extends ServiceProvider
     {
         $this->app->singleton('command.formatter.make', function ($app) {
             return new FormatterMakeCommand($app['files']);
+        });
+    }
+
+    /**
+     * Register the command.
+     *
+     * @return void
+     */
+    protected function registerFoundationMakeCommand()
+    {
+        $this->app->singleton('command.foundation.make', function ($app) {
+            return new FoundationMakeCommand($app['files']);
         });
     }
 }
