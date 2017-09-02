@@ -92,4 +92,12 @@ Providing commands:
     $ php artisan make:presenter UserPresenter
 ```
 
+### Generating Foundation
+> It can be generating class foundation.
+
+```
+    $ php artisan make:foundation Taggable
+```
+
+
 If you need more examples and documentation, see [documentation](https://github.com/Mombuyish/Laravel-Oh-Generators/wiki).
