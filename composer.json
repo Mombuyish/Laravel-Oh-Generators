@@ -27,8 +27,10 @@
     },
 
     "require": {
-        "php": ">=7.0",
-        "laravel/laravel": "5.*"
+        "php": ">=7",
+        "illuminate/support": "5.*",
+        "illuminate/console": "5.*",
+        "illuminate/filesystem": "5.*"
     },
 
     "require-dev": {
