@@ -4,7 +4,7 @@ namespace DummyNamespace;
 
 use Yish\Generators\Foundation\Repository\Repository;
 
-class DummyClass extends Repository
+class DummyClass
 {
     protected $model;
 
