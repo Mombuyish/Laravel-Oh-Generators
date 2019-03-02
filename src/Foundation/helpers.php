@@ -1,11 +1,10 @@
 <?php
 
 use Yish\Generators\Exceptions\ClassNotFoundException;
-use Yish\Generators\Exceptions\MethodNotFoundException;
 use Illuminate\Http\Request;
 
-if (! function_exists('transform')) {
-    function transform($instance, $attributes)
+if (! function_exists('transformer')) {
+    function transformer($instance, $attributes)
     {
         if (! class_exists($instance)) {
             throw new ClassNotFoundException($instance);
@@ -15,8 +14,8 @@ if (! function_exists('transform')) {
     }
 }
 
-if (! function_exists('format')) {
-    function format(Request $request, $instance, $items)
+if (! function_exists('formatter')) {
+    function formatter(Request $request, $instance, $items)
     {
         if (! class_exists($instance)) {
             throw new ClassNotFoundException($instance);

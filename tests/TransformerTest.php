@@ -30,7 +30,7 @@ class TransformerTest extends TestCase
     {
         $expected = ['name' => 'yish'];
 
-        $result = transform(UserTransformer::class, [
+        $result = transformer(UserTransformer::class, [
             'name' => 'yish',
             'age' => 28
         ]);
@@ -46,6 +46,6 @@ class TransformerTest extends TestCase
     {
         $this->expectException(\Yish\Generators\Exceptions\ClassNotFoundException::class);
 
-        transform(ABCD::class, []);
+        transformer(ABCD::class, []);
     }
 }

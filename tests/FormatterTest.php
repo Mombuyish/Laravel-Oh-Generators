@@ -297,7 +297,7 @@ class FormatterTest extends TestCase
             ],
         ];
 
-        $result = format(request(), InstanceSuccess::class, [
+        $result = formatter(request(), InstanceSuccess::class, [
             1,
             2,
             3,
@@ -323,7 +323,7 @@ class FormatterTest extends TestCase
             'errors' => null,
         ];
 
-        $result = format(request(), InstanceFailed::class, null);
+        $result = formatter(request(), InstanceFailed::class, null);
 
         $this->assertEquals($expected, $result);
     }
@@ -344,7 +344,7 @@ class FormatterTest extends TestCase
             'items' => [],
         ];
 
-        $result = format(request(), CustomSuccessMessage::class, []);
+        $result = formatter(request(), CustomSuccessMessage::class, []);
 
         $this->assertEquals($expected, $result);
     }
@@ -363,7 +363,7 @@ class FormatterTest extends TestCase
             'items' => [],
         ];
 
-        $result = format(request(), CustomSuccessCode::class, []);
+        $result = formatter(request(), CustomSuccessCode::class, []);
 
         $this->assertEquals($expected, $result);
     }
@@ -384,7 +384,7 @@ class FormatterTest extends TestCase
             'items' => [],
         ];
 
-        $result = format(request(), CustomSuccessAll::class, []);
+        $result = formatter(request(), CustomSuccessAll::class, []);
 
         $this->assertEquals($expected, $result);
     }
@@ -405,7 +405,7 @@ class FormatterTest extends TestCase
             'errors' => [],
         ];
 
-        $result = format(request(), CustomFailedMessage::class, []);
+        $result = formatter(request(), CustomFailedMessage::class, []);
 
         $this->assertEquals($expected, $result);
     }
@@ -424,7 +424,7 @@ class FormatterTest extends TestCase
             'errors' => [],
         ];
 
-        $result = format(request(), CustomFailedCode::class, []);
+        $result = formatter(request(), CustomFailedCode::class, []);
 
         $this->assertEquals($expected, $result);
     }
@@ -445,7 +445,7 @@ class FormatterTest extends TestCase
             'errors' => [],
         ];
 
-        $result = format(request(), CustomFailedAll::class, []);
+        $result = formatter(request(), CustomFailedAll::class, []);
 
         $this->assertEquals($expected, $result);
     }
@@ -458,7 +458,7 @@ class FormatterTest extends TestCase
     {
         $this->expectException(\Yish\Generators\Exceptions\ClassNotFoundException::class);
 
-        format(request(), ABCD::class, []);
+        formatter(request(), ABCD::class, []);
     }
 
     /**
@@ -469,7 +469,7 @@ class FormatterTest extends TestCase
     {
         $this->expectException(\Yish\Generators\Exceptions\InvalidArgumentException::class);
 
-        format(request(), ErrorStatus::class, []);
+        formatter(request(), ErrorStatus::class, []);
     }
 
     /**
@@ -490,7 +490,7 @@ class FormatterTest extends TestCase
             'errors' => [],
         ];
 
-        $result = format(request(), NoGivenStatus::class, []);
+        $result = formatter(request(), NoGivenStatus::class, []);
 
         $this->assertEquals($expected, $result);
     }
