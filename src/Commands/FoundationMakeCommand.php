@@ -40,6 +40,6 @@ class FoundationMakeCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\Foundations';
+        return $rootNamespace.'\Foundation';
     }
 }
