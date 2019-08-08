@@ -10,7 +10,7 @@
 
 # Laravel Oh Generators
 
-> This package extends the core file generators that are included with Laravel 5
+> This package extends the core file generators that are included with Laravel 5 / 6
 
 # Installation
 
