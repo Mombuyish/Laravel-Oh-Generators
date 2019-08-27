@@ -1,0 +1,18 @@
+<?php
+
+namespace DummyNamespace;
+
+use Yish\Generators\Foundation\Parser\Parser;
+
+class DummyClass extends Parser
+{
+    public function parse(array $items)
+    {
+        return parent::parse($items);
+    }
+
+    public function keys()
+    {
+        //
+    }
+}
