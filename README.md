@@ -15,7 +15,7 @@ This package extends the core file generators that are included with Laravel 5 /
 #### Laravel >= 5
 - 5.4 before using branch `1.1.x`
 - 5.5 ~ 5.7 using branch `2.0.x`
-- 5.8 or later using branch `2.1.x`
+- 5.8 - 6.x using branch `3.x.x`
 
 ## Installation
 
@@ -287,4 +287,54 @@ class Taggable
 {
   //
 }
+```
+
+## Generating Transport
+It can be generating class transport.
+``` bash
+$ php artisan make:transport UserTransport
+```
+``` php
+<?php
+
+namespace App\Transports;
+
+class UserTransport
+{
+  //
+}
+```
+
+## Generating Parser
+It can be generating class parser.
+``` bash
+$ php artisan make:parser UserParser
+```
+``` php
+<?php
+
+namespace App\Parsers;
+
+use Yish\Generators\Foundation\Parser\Parser;
+
+class UserParser extends Parser
+{
+    public function parse(array $items)
+    {
+        return parent::parse($items);
+    }
+
+    public function keys()
+    {
+        return [
+            'name',
+            'ages',
+            'location'
+        ];
+    }
+}
+```
+``` php
+$parser = app(UserParser::class)->parse(['Yish', 30, 'Taipei']);
+// ['name' => 'Yish', 'ages' => 30, 'location' => 'Taipei'];
 ```
