@@ -15,7 +15,7 @@ This package extends the core file generators that are included with Laravel 5 /
 #### Laravel >= 5
 - 5.4 before using branch `1.1.x`
 - 5.5 ~ 5.7 using branch `2.0.x`
-- 5.8 - 6.x using branch `3.x.x`
+- 5.8 - 7.x using branch `3.x.x`
 
 ## Installation
 
