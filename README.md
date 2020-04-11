@@ -338,3 +338,24 @@ class UserParser extends Parser
 $parser = app(UserParser::class)->parse(['Yish', 30, 'Taipei']);
 // ['name' => 'Yish', 'ages' => 30, 'location' => 'Taipei'];
 ```
+
+## Generating Response
+
+It can be generating class response.
+
+``` bash
+$ php artisan make:response UserResponse
+```
+
+``` php
+<?php
+namespace App\Responses;
+use Illuminate\Contracts\Support\Responsable;
+class UserResponse implements Responsable
+{
+    public function toResponse($request)
+    {
+        //
+    }
+}
+```
