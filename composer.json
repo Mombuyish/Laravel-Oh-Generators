@@ -1,6 +1,6 @@
 {
     "name": "yish/generators",
-    "description": "This package extends the core file generators that are included with Laravel 5",
+    "description": "This package extends the core file generators that are included with Laravel 5 or later.",
     "keywords": ["laravel", "patterns", "generator"],
     "license": "MIT",
     "homepage": "https://github.com/Mombuyish/Laravel-Oh-Generators",

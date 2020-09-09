@@ -8,7 +8,7 @@
 <a href="https://packagist.org/packages/yish/generators"><img src="https://poser.pugx.org/yish/generators/v/unstable.svg" alt="License"></a>
 </p>
 
-This package extends the core file generators that are included with Laravel 5 / 6
+This package extends the core file generators that are included with Laravel 5 or later.
 
 ## Requirement
 #### PHP >= 7
